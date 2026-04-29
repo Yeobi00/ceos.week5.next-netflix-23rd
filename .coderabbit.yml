@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+language: ko-KR
+
+reviews:
+  profile: chill
+  poem: false
+  
+  auto_review:
+    enabled: true
+    drafts: false
+  
+  instructions: |
+    - 한국어 존댓말로 리뷰해주세요
+    - Conventional Commits 컨벤션을 따릅니다 (feat, fix, docs, chore 등)
+    - 과도한 nitpick보다는 실제 버그나 보안 이슈에 집중해주세요
