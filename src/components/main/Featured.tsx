@@ -21,16 +21,17 @@ export default function Featured() {
     fetchFeatured();
   }, []);
 
-  if (!movie) return <div className="h-[60vh] bg-black" />;
+  if (!movie) return <div className="h-[415px] bg-black" />;
 
   return (
     <section className="relative w-full">
       {/* 배경 포스터 */}
-      <div className="relative h-[55vh] w-full">
+      <div className="relative h-[415px] w-full">
         <Image
           src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-          alt={movie.title}
+          alt={movie.title || movie.name || ''}
           fill
+          sizes="100vw"
           className="object-cover"
           priority
         />
@@ -47,14 +48,14 @@ export default function Featured() {
       {/* 하단 버튼 영역 */}
       <div className="flex flex-col items-center pt-3 pb-6">
         {/* 버튼 그룹 */}
-        <div className="flex w-full items-center justify-center gap-10 px-3">
+        <div className="flex w-full items-center justify-center gap-11 px-3">
           <button className="flex flex-col items-center gap-1 text-white">
             <Image src={AddIcon} alt="My List" width={24} height={24} />
             <span className="text-caption1">My List</span>
           </button>
 
-          <button className="bg-grey-600 flex items-center justify-center gap-2 rounded-md px-8 py-2 text-black transition-transform active:scale-95">
-            <Image src={PlayIcon} alt="Play" width={20} height={20} className="brightness-0" />
+          <button className="bg-grey-600 flex h-11 w-27 items-center justify-center gap-3 rounded-sm text-black transition-transform active:scale-95">
+            <Image src={PlayIcon} alt="Play" width={14} height={18} className="brightness-0" />
             <span className="text-label1 font-bold">Play</span>
           </button>
 

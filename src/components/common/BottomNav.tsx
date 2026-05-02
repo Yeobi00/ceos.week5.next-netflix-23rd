@@ -21,8 +21,8 @@ export default function BottomNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="bg-grey-900 z-nav fixed right-0 bottom-0 left-0 w-full">
-      <div className="flex items-center justify-around py-5">
+    <nav className="z-nav fixed right-0 bottom-8 left-0 mx-auto w-full max-w-[375px]">
+      <div className="bg-grey-900 flex h-14 items-center justify-around">
         {NAV_ITEMS.map((item) => {
           const isActive = pathname === item.href;
 
@@ -30,9 +30,9 @@ export default function BottomNav() {
             <Link
               href={item.href}
               key={item.name}
-              className="flex cursor-pointer flex-col items-center gap-4"
+              className="flex cursor-pointer flex-col items-center gap-2"
             >
-              <div className={`relative h-6 w-6 ${isActive ? '' : 'opacity-40'}`}>
+              <div className={`relative h-[18px] w-[18px] ${isActive ? '' : 'opacity-40'}`}>
                 <Image
                   src={item.icon}
                   alt={item.name}

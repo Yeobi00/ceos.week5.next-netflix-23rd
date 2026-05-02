@@ -8,19 +8,25 @@ interface SplashScreenProps {
   children: React.ReactNode;
 }
 
-export default function SplashScreen({ children }: SplashScreenProps) {
-  const [showSplash, setShowSplash] = useState(true);
+function getInitialStatus(): 'splash' | 'done' {
+  if (typeof window === 'undefined') return 'splash';
+  return sessionStorage.getItem('splashShown') ? 'done' : 'splash';
+}
 
-  if (!showSplash) {
-    return <>{children}</>;
-  }
+export default function SplashScreen({ children }: SplashScreenProps) {
+  const [status, setStatus] = useState<'splash' | 'done'>(getInitialStatus);
+
+  if (status === 'done') return <>{children}</>;
 
   return (
     <div className="z-splash fixed inset-0 flex items-center justify-center bg-black">
       <Lottie
         animationData={netflixIntro}
         loop={false}
-        onComplete={() => setShowSplash(false)}
+        onComplete={() => {
+          sessionStorage.setItem('splashShown', 'true');
+          setStatus('done');
+        }}
         className="w-62.5"
       />
     </div>
