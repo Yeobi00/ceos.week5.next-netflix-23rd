@@ -1,30 +1,18 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
+import Layout from '@/components/common/Layout';
 
 export const metadata: Metadata = {
-  title: 'Next Netflix',
-  description: 'Netflix clone with Next.js',
+  title: 'Netflix Project',
+  description: 'Next.js Netflix Clone',
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ko" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body>{children}</body>
+    <html lang="ko" className="font-sans">
+      <body className="bg-black antialiased">
+        <Layout>{children}</Layout>
+      </body>
     </html>
   );
 }

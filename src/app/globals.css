@@ -1,1 +1,68 @@
 @import 'tailwindcss';
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../assets/fonts/PretendardVariable.woff2') format('woff2');
+}
+
+@theme {
+  --font-sans: 'Pretendard', ui-sans-serif, system-ui;
+
+  /* type system */
+  --text-heading1: 24px;
+  --text-heading1--line-height: 135%;
+  --text-heading1--letter-spacing: -0.02em;
+  --text-heading1--font-weight: 600;
+
+  --text-heading2: 20px;
+  --text-heading2--line-height: 135%;
+  --text-heading2--letter-spacing: -0.02em;
+  --text-heading2--font-weight: 600;
+
+  --text-body1: 18px;
+  --text-body1--line-height: 135%;
+  --text-body1--letter-spacing: -0.02em;
+  --text-body1--font-weight: 400;
+
+  --text-body2: 16px;
+  --text-body2--line-height: 135%;
+  --text-body2--letter-spacing: -0.02em;
+  --text-body2--font-weight: 400;
+
+  --text-label1: 20px;
+  --text-label1--line-height: 135%;
+  --text-label1--letter-spacing: -0.02em;
+  --text-label1--font-weight: 600;
+
+  --text-label2: 15px;
+  --text-label2--line-height: 135%;
+  --text-label2--letter-spacing: -0.02em;
+  --text-label2--font-weight: 400;
+
+  --text-caption1: 12px;
+  --text-caption1--line-height: 135%;
+  --text-caption1--letter-spacing: -0.02em;
+  --text-caption1--font-weight: 400;
+
+  --text-caption2: 10px;
+  --text-caption2--line-height: 135%;
+  --text-caption2--letter-spacing: -0.02em;
+  --text-caption2--font-weight: 500;
+
+  /* color system */
+  --color-grey-900: #121212;
+  --color-grey-800: #424242;
+  --color-grey-700: #8c8787;
+  --color-grey-600: #c4c4c4;
+
+  --background-image-main-gradient: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.45) 0%,
+    rgba(0, 0, 0, 0) 87%,
+    #000 100%
+  );
+
+  /* z-index system */
+  --z-index-nav: 50;
+  --z-index-splash: 100;
+}
