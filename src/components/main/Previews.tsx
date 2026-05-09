@@ -42,17 +42,6 @@ export default function Previews() {
           </button>
         ))}
       </div>
-
-      {/* 스크롤바 숨기기 */}
-      <style jsx>{`
-        .no-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .no-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
     </section>
   );
 }

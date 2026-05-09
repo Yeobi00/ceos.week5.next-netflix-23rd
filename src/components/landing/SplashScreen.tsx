@@ -1,22 +1,24 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 import Lottie from 'lottie-react';
 import netflixIntro from '@/assets/lottie/netflix-intro.json';
+
+const noop = () => () => {};
 
 interface SplashScreenProps {
   children: React.ReactNode;
 }
 
-function getInitialStatus(): 'splash' | 'done' {
-  if (typeof window === 'undefined') return 'splash';
-  return sessionStorage.getItem('splashShown') ? 'done' : 'splash';
-}
-
 export default function SplashScreen({ children }: SplashScreenProps) {
-  const [status, setStatus] = useState<'splash' | 'done'>(getInitialStatus);
+  const alreadyShown = useSyncExternalStore(
+    noop,
+    () => !!sessionStorage.getItem('splashShown'),
+    () => false,
+  );
+  const [animationDone, setAnimationDone] = useState(false);
 
-  if (status === 'done') return <>{children}</>;
+  if (alreadyShown || animationDone) return <>{children}</>;
 
   return (
     <div className="z-splash fixed inset-0 flex items-center justify-center bg-black">
@@ -25,7 +27,7 @@ export default function SplashScreen({ children }: SplashScreenProps) {
         loop={false}
         onComplete={() => {
           sessionStorage.setItem('splashShown', 'true');
-          setStatus('done');
+          setAnimationDone(true);
         }}
         className="w-62.5"
       />

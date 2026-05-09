@@ -9,42 +9,42 @@
   --font-sans: 'Pretendard', ui-sans-serif, system-ui;
 
   /* type system */
-  --text-heading1: 24px;
+  --text-heading1: 1.5rem;
   --text-heading1--line-height: 135%;
   --text-heading1--letter-spacing: -0.02em;
   --text-heading1--font-weight: 600;
 
-  --text-heading2: 20px;
+  --text-heading2: 1.25rem;
   --text-heading2--line-height: 135%;
   --text-heading2--letter-spacing: -0.02em;
   --text-heading2--font-weight: 600;
 
-  --text-body1: 18px;
+  --text-body1: 1.125rem;
   --text-body1--line-height: 135%;
   --text-body1--letter-spacing: -0.02em;
   --text-body1--font-weight: 400;
 
-  --text-body2: 16px;
+  --text-body2: 1rem;
   --text-body2--line-height: 135%;
   --text-body2--letter-spacing: -0.02em;
   --text-body2--font-weight: 400;
 
-  --text-label1: 20px;
+  --text-label1: 1.25rem;
   --text-label1--line-height: 135%;
   --text-label1--letter-spacing: -0.02em;
   --text-label1--font-weight: 600;
 
-  --text-label2: 15px;
+  --text-label2: 0.9375rem;
   --text-label2--line-height: 135%;
   --text-label2--letter-spacing: -0.02em;
   --text-label2--font-weight: 400;
 
-  --text-caption1: 12px;
+  --text-caption1: 0.75rem;
   --text-caption1--line-height: 135%;
   --text-caption1--letter-spacing: -0.02em;
   --text-caption1--font-weight: 400;
 
-  --text-caption2: 10px;
+  --text-caption2: 0.625rem;
   --text-caption2--line-height: 135%;
   --text-caption2--letter-spacing: -0.02em;
   --text-caption2--font-weight: 500;
@@ -65,4 +65,12 @@
   /* z-index system */
   --z-index-nav: 50;
   --z-index-splash: 100;
+}
+
+@utility no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }

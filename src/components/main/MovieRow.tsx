@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { movieService } from '@/api/movieService';
 import { Movie } from '@/types/movie';
 
-type MovieServiceKey = keyof typeof movieService;
+type MovieServiceKey = Exclude<keyof typeof movieService, 'searchMulti' | 'getTrendingPaginated'>;
 
 interface MovieRowProps {
   title: string;

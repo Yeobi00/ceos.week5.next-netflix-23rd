@@ -1,5 +1,6 @@
 import instance from './axios';
 import requests from './requests';
+import { MovieResponse } from '@/types/movie';
 
 export const movieService = {
   getNowPlaying: async () => {
@@ -49,6 +50,18 @@ export const movieService = {
     } catch (error) {
       console.error('getTrending 에러:', error);
       return [];
+    }
+  },
+
+  getTrendingPaginated: async (page: number = 1): Promise<MovieResponse | null> => {
+    try {
+      const response = await instance.get(requests.fetchTrending, {
+        params: { page },
+      });
+      return response.data;
+    } catch (error) {
+      console.error('getTrendingPaginated 에러:', error);
+      return null;
     }
   },
 
@@ -129,6 +142,18 @@ export const movieService = {
     } catch (error) {
       console.error('getDocumentaries 에러:', error);
       return [];
+    }
+  },
+
+  searchMulti: async (query: string, page: number = 1): Promise<MovieResponse | null> => {
+    try {
+      const response = await instance.get(requests.fetchSearchMulti, {
+        params: { query, page, include_adult: false },
+      });
+      return response.data;
+    } catch (error) {
+      console.error('searchMulti 에러:', error);
+      return null;
     }
   },
 };
