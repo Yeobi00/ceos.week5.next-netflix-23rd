@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import Image from 'next/image';
 import PlayCircleIcon from '@/assets/icons/ic-play-circle.svg';
 import { Movie } from '@/types/movie';
@@ -13,7 +14,10 @@ export default function SearchItem({ movie }: SearchItemProps) {
   const title = movie.title || movie.name || '';
 
   return (
-    <div className="bg-grey-800 flex h-19 w-full items-center">
+    <Link
+      href={`/movie/${movie.id}?type=${movie.name ? 'tv' : 'movie'}`}
+      className="bg-grey-800 flex h-19 w-full items-center active:opacity-80"
+    >
       <div className="relative h-19 w-[146px] shrink-0">
         {imagePath ? (
           <Image
@@ -31,6 +35,6 @@ export default function SearchItem({ movie }: SearchItemProps) {
       <button className="shrink-0 pr-3">
         <PlayCircleIcon className="h-7 w-7" />
       </button>
-    </div>
+    </Link>
   );
 }

@@ -1,4 +1,4 @@
-import { Movie } from '@/types/movie';
+import { Movie, MovieDetail } from '@/types/movie';
 import requests from './requests';
 
 const BASE_URL = 'https://api.themoviedb.org/3';
@@ -18,6 +18,20 @@ async function tmdbFetch(endpoint: string): Promise<Movie[]> {
   }
 }
 
+// 상세 페이지 전용
+async function tmdbFetchDetail(endpoint: string): Promise<MovieDetail | null> {
+  try {
+    const separator = endpoint.includes('?') ? '&' : '?';
+    const url = `${BASE_URL}${endpoint}${separator}api_key=${API_KEY}&language=ko-KR`;
+    const res = await fetch(url, { next: { revalidate: 3600 } }); // 여기도 ISR 적용
+    if (!res.ok) throw new Error(`TMDB API error: ${res.status}`);
+    return await res.json();
+  } catch (error) {
+    console.error(`TMDB detail fetch error (${endpoint}):`, error);
+    return null;
+  }
+}
+
 export const movieServiceServer = {
   getNowPlaying: () => tmdbFetch(requests.fetchNowPlaying),
   getTopKorean: () => tmdbFetch(requests.fetchTopKorean),
@@ -30,4 +44,6 @@ export const movieServiceServer = {
   getActionMovies: () => tmdbFetch(requests.fetchActionMovies),
   getComedyMovies: () => tmdbFetch(requests.fetchComedyMovies),
   getThrillerMovies: () => tmdbFetch(requests.fetchThrillerMovies),
+  getMovieDetails: (id: string, type: 'movie' | 'tv' = 'movie') =>
+    tmdbFetchDetail(`/${type}/${id}`),
 };

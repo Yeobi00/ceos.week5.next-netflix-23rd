@@ -156,4 +156,16 @@ export const movieService = {
       return null;
     }
   },
+
+  getMovieDetails: async (id: string, type: 'movie' | 'tv' = 'movie') => {
+    try {
+      const response = await instance.get(`/${type}/${id}`, {
+        params: { language: 'ko-KR' },
+      });
+      return response.data;
+    } catch (error) {
+      console.error('getMovieDetails 에러:', error);
+      return null;
+    }
+  },
 };

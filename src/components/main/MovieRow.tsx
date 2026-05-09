@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { Movie } from '@/types/movie';
 
 interface MovieRowProps {
@@ -8,7 +9,6 @@ interface MovieRowProps {
 }
 
 export default function MovieRow({ title, movies, variant = 'default' }: MovieRowProps) {
-
   const cardSize = {
     default: { width: 103, height: 161 },
     large: { width: 154, height: 251 },
@@ -21,8 +21,9 @@ export default function MovieRow({ title, movies, variant = 'default' }: MovieRo
 
       <div className="no-scrollbar flex gap-[7px] overflow-x-auto px-3">
         {movies.map((movie) => (
-          <div
+          <Link
             key={movie.id}
+            href={`/movie/${movie.id}${title === 'Netflix Originals' ? '?type=tv' : ''}`}
             className="relative shrink-0 overflow-hidden rounded-xs"
             style={{ width: cardSize.width, height: cardSize.height }}
           >
@@ -33,7 +34,7 @@ export default function MovieRow({ title, movies, variant = 'default' }: MovieRo
               sizes={`${cardSize.width}px`}
               className="object-cover"
             />
-          </div>
+          </Link>
         ))}
       </div>
     </section>
