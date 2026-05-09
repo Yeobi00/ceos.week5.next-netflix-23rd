@@ -1,24 +1,13 @@
-'use client';
-
-import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { movieService } from '@/api/movieService';
 import { Movie } from '@/types/movie';
-
-type MovieServiceKey = Exclude<keyof typeof movieService, 'searchMulti' | 'getTrendingPaginated'>;
 
 interface MovieRowProps {
   title: string;
-  fetchKey: MovieServiceKey;
+  movies: Movie[];
   variant?: 'default' | 'large' | 'tall';
 }
 
-export default function MovieRow({ title, fetchKey, variant = 'default' }: MovieRowProps) {
-  const [movies, setMovies] = useState<Movie[]>([]);
-
-  useEffect(() => {
-    movieService[fetchKey]().then(setMovies);
-  }, [fetchKey]);
+export default function MovieRow({ title, movies, variant = 'default' }: MovieRowProps) {
 
   const cardSize = {
     default: { width: 103, height: 161 },

@@ -1,20 +1,12 @@
 'use client';
-import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { movieService } from '@/api/movieService';
 import { Movie } from '@/types/movie';
 
-export default function Previews() {
-  const [movies, setMovies] = useState<Movie[]>([]);
+interface PreviewsProps {
+  movies: Movie[];
+}
 
-  useEffect(() => {
-    const fetchMovies = async () => {
-      //한국 인기 콘텐츠 데이터 사용
-      const data = await movieService.getTopKorean();
-      setMovies(data);
-    };
-    fetchMovies();
-  }, []);
+export default function Previews({ movies }: PreviewsProps) {
 
   return (
     <section className="py-6">

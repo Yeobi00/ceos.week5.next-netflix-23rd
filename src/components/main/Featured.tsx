@@ -1,7 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { movieService } from '@/api/movieService';
 import { Movie } from '@/types/movie';
 
 import Top10Icon from '@/assets/icons/ic-top10.svg';
@@ -9,40 +8,25 @@ import AddIcon from '@/assets/icons/ic-add.svg';
 import PlayIcon from '@/assets/icons/ic-play.svg';
 import InfoIcon from '@/assets/icons/ic-info.svg';
 
-export default function Featured() {
-  const [movie, setMovie] = useState<Movie[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
+interface FeaturedProps {
+  movies: Movie[];
+}
 
-  useEffect(() => {
-    let isMounted = true;
-    const fetchFeatured = async () => {
-      try {
-        const movies = await movieService.getNowPlaying();
-        if (!isMounted) return;
-        setMovie(movies.slice(0, 10)); //top10 위해 10개 추출
-      } catch (error) {
-        if (isMounted) setMovie([]);
-        console.error('Failed to fetch featured movies', error);
-      }
-    };
-    fetchFeatured();
-    return () => {
-      isMounted = false;
-    };
-  }, []);
+export default function Featured({ movies }: FeaturedProps) {
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   //5초에 한번씩 영화 rotation
   useEffect(() => {
-    if (movie.length === 0) return;
+    if (movies.length === 0) return;
 
     const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % movie.length);
+      setCurrentIndex((prev) => (prev + 1) % movies.length);
     }, 5000);
 
     return () => clearInterval(timer);
-  }, [movie]);
+  }, [movies]);
 
-  const currentMovie = movie[currentIndex];
+  const currentMovie = movies[currentIndex];
 
   if (!currentMovie) return <div className="h-[415px] bg-black" />;
 
